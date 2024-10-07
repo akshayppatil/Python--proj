@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+  app:
+    build: .
+    depends_on: 
+      - db  
+    ports:
+      - "5000:5000" 
+    environment:
+      - POSTGRES_DB=auth_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=akshay@1
+      - POSTGRES_HOST=db  # Ensure this matches the service name
+      - POSTGRES_PORT=5432
+
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=akshay@1
+      - POSTGRES_DB=auth_db
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports: 
+      - 5432:5432
